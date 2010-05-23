@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical">
+
+       <!--<RelativeLayout android:id="@+id/progress_login_layout"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="26dip"-->
+        <!--android:background="@drawable/top_blue">-->
+	    <!--<ProgressBar android:id="@+id/progress_login"-->
+			<!--android:indeterminate="true"-->
+	        <!--style="?android:attr/progressBarStyleSmall"-->
+	        <!--android:layout_width="20dip"-->
+	        <!--android:layout_height="20dip"-->
+	        <!--android:layout_marginRight="3dip"-->
+	        <!--android:layout_alignParentRight="true"-->
+	        <!--android:layout_centerVertical="true"-->
+			<!--/>-->
+       	<!--</RelativeLayout>-->
+
+    <TextView android:id="@+id/result"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:visibility="gone"
+            />
+
+
+    <ProgressBar android:id="@+id/progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="5dip"
+        android:max="100"
+        android:progress="0"
+        android:secondaryProgress="0"
+        android:layout_marginRight="3dip"
+        android:layout_marginLeft="3dip"
+		/><!--
+        android:progressDrawable="@drawable/top_blue"
+
+        --><WebView android:id="@+id/webview"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            />
+
+
+</LinearLayout>
