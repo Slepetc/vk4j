@@ -60,7 +60,7 @@ public class Application implements RequestExecutor {
         }
     };
 
-    public boolean isLoginSuccess(String url) {
+    private boolean isLoginSuccess(String url) {
         try {
             Matcher m = PATTERN_LOGIN.matcher(URLDecoder.decode(url));
 
