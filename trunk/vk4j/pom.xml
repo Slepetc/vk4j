@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--<parent>-->
+        <!--<artifactId>vkdroid</artifactId>-->
+        <!--<groupId>com.vkdroid</groupId>-->
+        <!--<version>1.0</version>-->
+    <!--</parent>-->
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.vk4j</groupId>
+    <artifactId>vk4j</artifactId>
+    <version>0.1</version>
+    <packaging>jar</packaging>
+    <url>http://vk4j.org</url>
+
+    <name>vk4j.org</name>
+    <description>VKontakte API for Java</description>
+
+     <dependencies>
+         <dependency>
+             <groupId>org.apache.httpcomponents</groupId>
+             <artifactId>httpclient</artifactId>
+             <version>4.0.1</version>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>commons-lang</groupId>
+             <artifactId>commons-lang</artifactId>
+             <version>2.5</version>
+             <scope>compile</scope>
+         </dependency>
+         <dependency>
+           <groupId>org.json</groupId>
+           <artifactId>json</artifactId>
+           <version>20090211</version>
+           <scope>provided</scope>
+         </dependency>
+         <!--<dependency>-->
+           <!--<groupId>org.googlecode.userapi</groupId>-->
+           <!--<artifactId>userapi-java</artifactId>-->
+           <!--<version>0.1</version>-->
+             <!--<scope>provided</scope>-->
+         <!--</dependency>-->
+         <dependency>
+           <groupId>junit</groupId>
+           <artifactId>junit</artifactId>
+           <version>3.8.1</version>
+           <scope>test</scope>
+         </dependency>
+      </dependencies>
+
+
+
+    <build>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.5</source>
+            <target>1.5</target>
+            <verbose>false</verbose>
+          </configuration>
+        </plugin>
+    </plugins>
+    </build>
+
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <distributionManagement>
+      <repository>
+        <id>${distribution.repository.id}</id>
+        <url>${distribution.repository.url}</url>
+        <name>${distribution.repository.name}</name>
+      </repository>
+    </distributionManagement>    
+
+
+</project>
