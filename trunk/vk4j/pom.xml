@@ -2,11 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <!--<parent>-->
-        <!--<artifactId>vkdroid</artifactId>-->
-        <!--<groupId>com.vkdroid</groupId>-->
-        <!--<version>1.0</version>-->
-    <!--</parent>-->
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.vk4j</groupId>
@@ -15,7 +10,7 @@
     <packaging>jar</packaging>
     <url>http://vk4j.org</url>
 
-    <name>vk4j.org</name>
+    <name>vk4j :: Library</name>
     <description>VKontakte API for Java</description>
 
      <dependencies>
@@ -37,12 +32,6 @@
            <version>20090211</version>
            <scope>provided</scope>
          </dependency>
-         <!--<dependency>-->
-           <!--<groupId>org.googlecode.userapi</groupId>-->
-           <!--<artifactId>userapi-java</artifactId>-->
-           <!--<version>0.1</version>-->
-             <!--<scope>provided</scope>-->
-         <!--</dependency>-->
          <dependency>
            <groupId>junit</groupId>
            <artifactId>junit</artifactId>
@@ -50,8 +39,6 @@
            <scope>test</scope>
          </dependency>
       </dependencies>
-
-
 
     <build>
       <plugins>
