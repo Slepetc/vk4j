@@ -16,3 +16,4 @@ syntax: regexp
 #*.cookies
 #trunk/vk4j/src/test/config
 #trunk/vk4j/src/test/java
+trunk/examples/android/res/values/app_id.xml
