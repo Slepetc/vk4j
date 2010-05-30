@@ -1,7 +1,6 @@
 package org.vk4j.api;
 
-import org.json.JSONObject;
-import org.vk4j.api.Response;
+import org.json.JSONArray;
 
 /**
  * Created by Vladimir Grachev.
@@ -9,6 +8,9 @@ import org.vk4j.api.Response;
  * Time: 5:27:07 PM
  */
 public interface Parser {
-    public Response parse(String string);
-    public Response parse(JSONObject object);
+    public Object parse(String string);
+
+    public <T extends Object, S extends Object> S parse(T object);
+
+    public <T extends Object> T getFromArray(JSONArray array, int index);
 }

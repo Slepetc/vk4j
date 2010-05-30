@@ -1,10 +1,11 @@
 package org.vk4j.parsers;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.vk4j.api.ParserBase;
-import org.vk4j.responses.FriendsList;
+import org.vk4j.api.ParserFactory;
+import org.vk4j.requests.GetFriends;
+
+
+import java.util.List;
 
 /**
  * Created by Vladimir Grachev.
@@ -13,22 +14,13 @@ import org.vk4j.responses.FriendsList;
  */
 public class FriendsListParser extends ParserBase {
 
-    public FriendsList parse(JSONObject object) {
+    public static final String ID = GetFriends.METHOD;
 
-        FriendsList result = new FriendsList();
+    static {
+        ParserFactory.register(LongParser.ID, LongParser.class);
+    }
 
-        try {
-            JSONArray array = object.getJSONArray("response");
-
-            for (int i = 0; i < array.length(); i++) {
-                result.add(array.getLong(i));
-            }
-
-        } catch (JSONException e) {
-            //TODO: error!
-            e.printStackTrace();
-        }
-
-        return result;
+    public List<Long> parse(Object object) {
+        return parseArray(object, LongParser.ID);
     }
 }

@@ -18,8 +18,8 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.vk4j.api.ParserFactory;
+import org.vk4j.api.Request;
 import org.vk4j.api.RequestBase;
-import org.vk4j.api.Response;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -51,7 +51,7 @@ class Client {
         mHttpClient = new DefaultHttpClient(new ThreadSafeClientConnManager(params, schemeRegistry), params);
     }
 
-    private String process(RequestBase request) {
+    private String process(Request request) {
 
         try {
 
@@ -92,8 +92,8 @@ class Client {
         return "";
     }
 
-    Response execute(RequestBase request) {
-        return ParserFactory.get(request).parse(process(request));
+    Object execute(Request request) {
+        return ParserFactory.get(request.getMethod()).parse(process(request));
     }
 
 }

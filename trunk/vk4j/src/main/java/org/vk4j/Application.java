@@ -2,9 +2,7 @@ package org.vk4j;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.vk4j.api.RequestBase;
-import org.vk4j.api.RequestExecutor;
-import org.vk4j.api.Response;
+import org.vk4j.api.*;
 
 import java.math.BigInteger;
 import java.net.URLDecoder;
@@ -91,14 +89,13 @@ public class Application implements RequestExecutor {
         this.session = session;
     }
 
-    public <T extends RequestBase, S extends Response> S execute(T request) {
+    public <T extends Request, S extends Object> S execute(T request) {
         prepare(request);
-
         return (S) client.execute(request);
     }
 
 
-    private void prepare(RequestBase request) {
+    private void prepare(Request request) {
         request.add("api_id", Long.toString(id));
         request.add("v", "3.0");
         request.add("format", "JSON");
@@ -120,7 +117,7 @@ public class Application implements RequestExecutor {
             }
         }
 
-        public String get(RequestBase request) {
+        public String get(Request request) {
             StringBuilder sb = new StringBuilder();
             sb.append(session.getMid());
             md5.reset();

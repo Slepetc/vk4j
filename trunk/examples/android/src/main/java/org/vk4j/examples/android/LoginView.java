@@ -1,7 +1,6 @@
 package org.vk4j.examples.android;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,10 +12,10 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import org.vk4j.Application;
-import org.vk4j.responses.FriendsList;
 import org.vk4j.requests.GetFriends;
+import org.vk4j.responses.ListResponse;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.List;
 
 /**
  * Created by Vladimir Grachev.
@@ -86,7 +85,7 @@ public class LoginView extends Activity implements Application.ILoginProcessor {
                         Log.d(TAG, "Login Success");
                         webview.setVisibility(View.INVISIBLE);
 
-                        FriendsList friends = app.execute(new GetFriends());
+                        List<Long> friends = app.execute(new GetFriends());
 
                         StringBuilder sb = new StringBuilder();
 

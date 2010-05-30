@@ -1,7 +1,5 @@
 package org.vk4j.api;
 
-import org.vk4j.api.RequestBase;
-
 import java.util.HashMap;
 
 /**
@@ -17,18 +15,19 @@ public class ParserFactory {
         types.put(method, parser);
     }
 
-    public static Parser get(RequestBase request) {
-
-        return create(types.get(request.getMethod()));
+    public static Parser get(String id) {
+        return create(types.get(id));
     }
 
-    public static <T extends Parser> T  create(Class<T> type) {
+    private static <T extends Parser> T  create(Class<T> type) {
 
         try {
             return type.newInstance();
         } catch (InstantiationException e) {
+            //TODO: 
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            //TODO:
             e.printStackTrace();  
         }
 

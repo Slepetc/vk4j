@@ -1,4 +1,4 @@
-package org.vk4j;
+package org.vk4j.api;
 
 /**
  * Created by Vladimir Grachev.
