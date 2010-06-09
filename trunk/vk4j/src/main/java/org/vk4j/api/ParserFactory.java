@@ -11,15 +11,17 @@ public class ParserFactory {
 
     public static final HashMap<String, Class> types = new HashMap();
 
+    private ParserFactory() {} // IMPL NOTE instantiation prohibited
+
     public static void register(String method, Class parser) {
         types.put(method, parser);
     }
 
-    public static Parser get(String id) {
-        return create(types.get(id));
+    public static<T> Parser<T> newParser(String id) {
+        return newParser(types.get(id));
     }
 
-    private static <T extends Parser> T  create(Class<T> type) {
+    private static <T extends Parser> T newParser(Class<T> type) {
 
         try {
             return type.newInstance();

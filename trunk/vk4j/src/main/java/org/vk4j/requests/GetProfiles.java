@@ -37,5 +37,4 @@ public class GetProfiles extends RequestBase {
         }
         return sb.toString();
     }
-
 }

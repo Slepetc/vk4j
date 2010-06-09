@@ -91,7 +91,11 @@ public class Application implements RequestExecutor {
 
     public <T extends Request, S extends Object> S execute(T request) {
         prepare(request);
-        return (S) client.execute(request);
+
+        // Special thanks to Oleg Ignatenko ( http://ru.linkedin.com/in/olegignatenko ) for code review and useful comments :)
+        // see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6302954
+        // and http://java.sun.com/docs/books/jls/third_edition/html/expressions.html#15.12
+        return client.<S>execute(request);
     }
 
 

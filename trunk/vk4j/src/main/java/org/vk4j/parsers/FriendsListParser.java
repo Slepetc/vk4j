@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 28.04.2010
  * Time: 17:30:22
  */
-public class FriendsListParser extends ParserBase {
+public class FriendsListParser extends ParserBase<List<Long>> {
 
     public static final String ID = GetFriends.METHOD;
 

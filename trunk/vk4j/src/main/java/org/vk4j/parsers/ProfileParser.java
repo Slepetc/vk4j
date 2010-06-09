@@ -15,7 +15,7 @@ import java.util.List;
  * Date: May 29, 2010
  * Time: 1:03:31 AM
  */
-public class ProfileParser extends ParserBase {
+public class ProfileParser extends ParserBase<Profile> {
     
     public static final String ID = "Profile";
 

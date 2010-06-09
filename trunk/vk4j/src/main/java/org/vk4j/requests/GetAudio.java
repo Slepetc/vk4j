@@ -20,28 +20,4 @@ public class GetAudio extends RequestBase {
     public GetAudio() {
         add("method", METHOD);
     }
-
-//    public static class Parser extends ParserBase {
-//
-//        @Override
-//        public AudioTracksList parse(JSONObject object) {
-//            AudioTracksList result = new AudioTracksList();
-//
-//            try {
-//                JSONArray array = object.getJSONArray("response");
-//
-//                AudioTrackParser parser = new AudioTrackParser();
-//
-//                for (int i = 0; i < array.length(); i++) {
-//                    result.add(parser.parse(array.getJSONObject(i)));
-//                }
-//
-//            } catch (JSONException e) {
-//                //TODO: error!
-//                e.printStackTrace();
-//            }
-//
-//            return result;
-//        }
-//    }
 }

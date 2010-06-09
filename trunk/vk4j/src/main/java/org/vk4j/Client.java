@@ -19,7 +19,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.vk4j.api.ParserFactory;
 import org.vk4j.api.Request;
-import org.vk4j.api.RequestBase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -92,8 +91,8 @@ class Client {
         return "";
     }
 
-    Object execute(Request request) {
-        return ParserFactory.get(request.getMethod()).parse(process(request));
+    <T> T execute(Request request) {
+        return ParserFactory.<T>newParser(request.getMethod()).parse(process(request));
     }
 
 }

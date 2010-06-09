@@ -2,6 +2,7 @@ package org.vk4j.parsers;
 
 import org.vk4j.api.ParserBase;
 import org.vk4j.api.ParserFactory;
+import org.vk4j.responses.Profile;
 
 import java.util.List;
 
@@ -10,13 +11,14 @@ import java.util.List;
  * Date: May 29, 2010
  * Time: 1:00:50 AM
  */
-public class ProfilesListParser extends ParserBase {
+public class ProfilesListParser extends ParserBase<List<Profile>> {
 
     static {
         ParserFactory.register(ProfileParser.ID, ProfileParser.class);
     }
-
-    public List<Long> parse(Object object) {
+    
+    @Override
+    public List<Profile> parse(Object object) {
         return parseArray(object, ProfileParser.ID);
     }
 

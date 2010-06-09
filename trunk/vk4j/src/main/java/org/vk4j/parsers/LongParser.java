@@ -12,13 +12,9 @@ import org.vk4j.requests.GetFriends;
  * Date: May 26, 2010
  * Time: 12:47:48 PM
  */
-public class LongParser extends ParserBase {
+public class LongParser extends ParserBase<Long> {
 
     public static final String ID = "Long";
-
-//    static {
-//        ParserFactory.register(ID, LongParser.class);
-//    }
 
     @Override
     public Long parse(Object object) {

@@ -24,5 +24,4 @@ public class GetFriends extends RequestBase {
     public GetFriends() {
         add("method", METHOD);
     }
-
 }

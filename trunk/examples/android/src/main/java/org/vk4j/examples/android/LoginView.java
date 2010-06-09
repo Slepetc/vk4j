@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import org.vk4j.Application;
 import org.vk4j.requests.GetFriends;
-import org.vk4j.responses.ListResponse;
 
 import java.util.List;
 

@@ -11,7 +11,7 @@ import org.vk4j.responses.AudioTrack;
  * Date: 16.05.2010
  * Time: 22:50:49
  */
-public class AudioTrackParser extends ParserBase {
+public class AudioTrackParser extends ParserBase<AudioTrack> {
 
     public static final String ID = "AudioTrack";
 
