@@ -33,8 +33,21 @@ public abstract class RequestBase implements Request {
         add(key, sb.toString());
     }
 
+    public void add(String key, String[] values) {
+        StringBuilder sb = new StringBuilder();
+
+        for (String value : values) {
+            sb.append(value).append(",");
+        }
+
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - 1);
+        }
+        add(key, sb.toString());
+    }
+
     public String getMethod() {
-        return values.get("method");
+        return values.get(TAG_METHOD);
     }
 
     @Override

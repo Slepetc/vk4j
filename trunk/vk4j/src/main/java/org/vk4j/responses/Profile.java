@@ -1,5 +1,8 @@
 package org.vk4j.responses;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Vladimir Grachev.
  * Date: 27.04.2010
@@ -7,43 +10,50 @@ package org.vk4j.responses;
  */
 public class Profile {
 
-    private Long uid;
-    private String firstName;
-    private String lastName;
+    public static final String[] FIELDS = { "uid",
+                                            "first_name",
+                                            "last_name",
+                                            "nickname",
+                                            "sex",
+                                            "bdate",
+                                            "city",
+                                            "country",
+                                            "timezone",
+                                            "photo",
+                                            "photo_medium",
+                                            "photo_big",
+                                            "has_mobile",
+                                            "rate",
+                                            "contacts",
+                                            "education"
+    };
 
-    public Profile(Long uid, String firstName, String lastName) {
-        this.uid = uid;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    private final Map<String, String> values = new HashMap();
+
+    public Profile() {
+
+    }
+
+    public void put(String field, String value) {
+        values.put(field, value);
+    }
+
+    public String get(String field) {
+        return values.get(field);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Profile: ")
-                .append(" {")
-                .append("uid=").append(uid).append(", ")
-                .append("firstName=").append(firstName).append(", ")
-                .append("lastName=").append(lastName).append("}");
+                .append(" {");
+
+        for (Map.Entry<String, String> entry : values.entrySet()) {
+            sb.append(entry.getKey()).append("=").append(entry.getValue()).append(", ");
+        }
+
+        sb.append("}");
+
         return sb.toString();
     }
-
-//    private String nickName;
-//    private String sex;
-//    private String birthday;
-//    private String city;
-//    private String country;
-//    private String timezone;
-//    private String photo;
-//    private String photo_medium;
-//    private String photo_big;
-//    private String has_mobile;
-//    private String rate;
-//    private String home_phone;
-//    private String mobile_phone;
-//    private String university;
-//    private String university_name;
-//    private String faculty;
-//    private String faculty_name;
-//    private String graduation;
 }

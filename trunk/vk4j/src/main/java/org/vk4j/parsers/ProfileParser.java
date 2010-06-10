@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.vk4j.api.ParserBase;
 import org.vk4j.api.VkException;
+import org.vk4j.requests.GetProfiles;
 import org.vk4j.responses.Profile;
 
 import java.util.ArrayList;
@@ -27,12 +28,16 @@ public class ProfileParser extends ParserBase<Profile> {
         JSONObject profile = (JSONObject) object;
 
         try {
-            Long uid = profile.getLong("uid");
-            String firstName = profile.getString("first_name");
-            String lastName = profile.getString("last_name");
 
-            return new Profile(uid, firstName, lastName);
+            Profile result = new Profile();
 
+            for (String field : Profile.FIELDS) {
+                if (profile.has(field)) {
+                    result.put(field, profile.getString(field));
+                }
+            }
+
+            return result;
         } catch (JSONException e) {
             //TODO:
             e.printStackTrace();
@@ -40,5 +45,4 @@ public class ProfileParser extends ParserBase<Profile> {
 
         return null;
     }
-
 }
