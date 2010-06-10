@@ -84,11 +84,11 @@ public class LoginView extends Activity implements Application.ILoginProcessor {
                         Log.d(TAG, "Login Success");
                         webview.setVisibility(View.INVISIBLE);
 
-                        List<Long> friends = app.execute(new GetFriends());
+                        List<String> friends = app.execute(new GetFriends());
 
                         StringBuilder sb = new StringBuilder();
 
-                        for (Long uid : friends) {
+                        for (String uid : friends) {
                             Log.d(TAG, "friendsList " + uid);
                             sb.append("friendId: ").append(uid).append("\n");
                         }
