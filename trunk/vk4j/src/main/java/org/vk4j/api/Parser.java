@@ -18,6 +18,7 @@ public interface Parser<T extends Object> {
     public T parse(Object object);
     public <T1 extends Object> List<T1> parseArray(Object object, String type);
     public T getFromArray(JSONArray array, int idx);
+    public void setInnerType(String innerType);
 
     public static class Helper {
         private Helper() {} // IMPL NOTE instantiation prohibited

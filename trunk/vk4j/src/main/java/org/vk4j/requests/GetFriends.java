@@ -1,10 +1,10 @@
 package org.vk4j.requests;
 
 import org.vk4j.api.ParserFactory;
-import org.vk4j.api.RequestBase;
-import org.vk4j.parsers.FriendsListParser;
 import org.vk4j.parsers.ListParser;
+import org.vk4j.api.RequestBase;
 import org.vk4j.parsers.LongParser;
+import org.vk4j.parsers.StringParser;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import java.util.List;
 public class GetFriends extends RequestBase {
 
     public static final String METHOD = "getFriends";
-
+    
     static {
-        ParserFactory.register(METHOD, FriendsListParser.class);
+        ParserFactory.register(METHOD, new Class[]{ListParser.class, StringParser.class});
     }
     
     public GetFriends() {
-        add("method", METHOD);
+        add(TAG_METHOD, METHOD);
     }
 }

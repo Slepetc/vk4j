@@ -13,8 +13,6 @@ import org.vk4j.responses.AudioTrack;
  */
 public class AudioTrackParser extends ParserBase<AudioTrack> {
 
-    public static final String ID = "AudioTrack";
-
     public AudioTrack parse(Object object) {
 
         if (!(object instanceof JSONObject)) {
@@ -34,7 +32,8 @@ public class AudioTrackParser extends ParserBase<AudioTrack> {
             return new AudioTrack(aid, ownerId, artist, title, duration, url);
 
         } catch (JSONException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            //TODO:
+            e.printStackTrace();
         }
 
         return null;

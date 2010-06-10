@@ -1,8 +1,11 @@
 package org.vk4j.requests;
 
 import org.vk4j.api.ParserFactory;
+import org.vk4j.parsers.ListParser;
 import org.vk4j.api.RequestBase;
-import org.vk4j.parsers.AudioTrackListParser;
+import org.vk4j.parsers.AudioTrackParser;
+
+import java.util.List;
 
 /**
  * Created by Vladimir Grachev.
@@ -14,10 +17,10 @@ public class GetAudio extends RequestBase {
     public static final String METHOD = "audio.get";
 
     static {
-        ParserFactory.register(METHOD, AudioTrackListParser.class);
+        ParserFactory.register(METHOD, ListParser.class, AudioTrackParser.class);
     }
 
     public GetAudio() {
-        add("method", METHOD);
+        add(TAG_METHOD, METHOD);
     }
 }

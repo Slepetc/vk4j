@@ -14,16 +14,10 @@ import org.vk4j.requests.GetFriends;
  */
 public class LongParser extends ParserBase<Long> {
 
-    public static final String ID = "Long";
-
     @Override
     public Long parse(Object object) {
 
         if (!(object instanceof Long)) {
-            System.out.println("Not long object " + object);
-
-            System.out.println("Object " + object.getClass());
-
             throw new VkException("This is not Long");
         }
 

@@ -1,9 +1,9 @@
 package org.vk4j.requests;
 
 import org.vk4j.api.ParserFactory;
+import org.vk4j.parsers.ListParser;
 import org.vk4j.api.RequestBase;
-import org.vk4j.api.RequestExecutor;
-import org.vk4j.parsers.ProfilesListParser;
+import org.vk4j.parsers.ProfileParser;
 
 import java.util.List;
 
@@ -16,25 +16,15 @@ public class GetProfiles extends RequestBase {
 
     public static final String METHOD = "getProfiles";
 
+    public static final String TAG_UIDS = "uids";
+    public static final String TAG_FIELDS = "fields";
+    public static final String TAG_NAME_CASE = "name_case";
+
     static {
-        ParserFactory.register(METHOD, ProfilesListParser.class);
+        ParserFactory.register(METHOD, ListParser.class, ProfileParser.class);
     }
 
-    public GetProfiles(List<Long> uids) {
-        add("method", METHOD);
-        add("uids", createUidsString(uids));
-    }
-
-    private String createUidsString(List<Long> uids) {
-        StringBuilder sb = new StringBuilder();
-
-        for (Long uid : uids) {
-            sb.append(uid).append(",");
-        }
-
-        if (sb.length() > 0) {
-            sb.setLength(sb.length() - 1);
-        }
-        return sb.toString();
+    public GetProfiles() {
+        add(TAG_METHOD, METHOD);
     }
 }

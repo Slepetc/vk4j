@@ -13,6 +13,16 @@ import java.util.List;
  */
 public abstract class ParserBase<T extends Object> implements Parser<T> {
 
+    protected String innerType;
+
+    public ParserBase () {
+        this.innerType = null;
+    }
+
+    public void setInnerType(String innerType) {
+        this.innerType = innerType;
+    }
+
     public T parse(String string) {
         return Parser.Helper.<T>parse(string, this);
     }

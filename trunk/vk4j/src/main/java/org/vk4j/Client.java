@@ -80,13 +80,13 @@ class Client {
 
         } catch (ClientProtocolException e) {
             //TODO: Internal Error
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             //TODO: Internal Error
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IOException e) {
             //TODO: connection failed!
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         return "";
     }
@@ -94,5 +94,4 @@ class Client {
     <T> T execute(Request request) {
         return ParserFactory.<T>newParser(request.getMethod()).parse(process(request));
     }
-
 }

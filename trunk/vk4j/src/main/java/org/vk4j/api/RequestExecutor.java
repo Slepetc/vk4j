@@ -8,5 +8,5 @@ import org.vk4j.api.RequestBase;
  * Time: 22:09:19
  */
 public interface RequestExecutor {
-    public <T extends Request, S extends Object> S execute(T request);
+    public <S extends Object> S execute(Request request);
 }

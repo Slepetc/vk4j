@@ -89,7 +89,7 @@ public class Application implements RequestExecutor {
         this.session = session;
     }
 
-    public <T extends Request, S extends Object> S execute(T request) {
+    public <S extends Object> S execute(Request request) {
         prepare(request);
 
         // Special thanks to Oleg Ignatenko ( http://ru.linkedin.com/in/olegignatenko ) for code review and useful comments :)

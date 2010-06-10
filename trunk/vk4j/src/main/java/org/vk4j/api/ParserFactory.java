@@ -1,6 +1,8 @@
 package org.vk4j.api;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Vladimir Grachev.
@@ -13,18 +15,27 @@ public class ParserFactory {
 
     private ParserFactory() {} // IMPL NOTE instantiation prohibited
 
-    public static void register(String method, Class parser) {
-        types.put(method, parser);
+    public static void register(String method, Class... parsers) {
+        for (Class parser : parsers) {
+            types.put(method, parser);
+            method += "$";
+        }
     }
+
 
     public static<T> Parser<T> newParser(String id) {
-        return newParser(types.get(id));
+        if (id == null) {
+            throw new VkException("Illegal id == null for parser creation");
+        }
+        return newParser(types.get(id), id + "$");
     }
 
-    private static <T extends Parser> T newParser(Class<T> type) {
+    private static <T extends Parser> T newParser(Class<T> type, String innerId) {
 
         try {
-            return type.newInstance();
+            T result = type.newInstance();
+            result.setInnerType(innerId);
+            return result;
         } catch (InstantiationException e) {
             //TODO: 
             e.printStackTrace();

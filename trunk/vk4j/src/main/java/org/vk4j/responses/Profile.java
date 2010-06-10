@@ -28,7 +28,7 @@ public class Profile {
         return sb.toString();
     }
 
-    //    private String nickName;
+//    private String nickName;
 //    private String sex;
 //    private String birthday;
 //    private String city;

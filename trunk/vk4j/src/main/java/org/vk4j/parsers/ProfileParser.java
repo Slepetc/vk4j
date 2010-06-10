@@ -17,8 +17,6 @@ import java.util.List;
  */
 public class ProfileParser extends ParserBase<Profile> {
     
-    public static final String ID = "Profile";
-
     @Override
     public Profile parse(Object object) {
 
@@ -36,9 +34,11 @@ public class ProfileParser extends ParserBase<Profile> {
             return new Profile(uid, firstName, lastName);
 
         } catch (JSONException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            //TODO:
+            e.printStackTrace();
         }
 
-        return null;    }
+        return null;
+    }
 
 }
