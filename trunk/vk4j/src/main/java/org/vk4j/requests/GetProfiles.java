@@ -25,6 +25,6 @@ public class GetProfiles extends RequestBase {
     }
 
     public GetProfiles() {
-        add(TAG_METHOD, METHOD);
+        super(METHOD);
     }
 }
