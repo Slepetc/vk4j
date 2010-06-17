@@ -15,10 +15,10 @@ public class GetAppFriends extends RequestBase {
     public static final String METHOD = "getAppFriends";
 
     static {
-        ParserFactory.register(METHOD, new Class[]{ListParser.class, StringParser.class});
+        ParserFactory.register(METHOD, ListParser.class, StringParser.class);
     }
 
     public GetAppFriends() {
-        add(TAG_METHOD, METHOD);
+        super(METHOD);
     }
 }
