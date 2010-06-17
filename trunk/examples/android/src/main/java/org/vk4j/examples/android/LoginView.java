@@ -12,6 +12,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import org.vk4j.Application;
+import org.vk4j.api.VkException;
 import org.vk4j.requests.GetFriends;
 
 import java.util.List;
@@ -84,24 +85,33 @@ public class LoginView extends Activity implements Application.ILoginProcessor {
                         Log.d(TAG, "Login Success");
                         webview.setVisibility(View.INVISIBLE);
 
-                        List<String> friends = app.execute(new GetFriends());
+                        StringBuffer sb = new StringBuffer();
 
-                        StringBuilder sb = new StringBuilder();
+                        try {
+                            List<String> friends = app.execute(new GetFriends());
 
-                        for (String uid : friends) {
-                            Log.d(TAG, "friendsList " + uid);
-                            sb.append("friendId: ").append(uid).append("\n");
+                            for (String uid : friends) {
+                                Log.d(TAG, "friendsList " + uid);
+                                sb.append("friendId: ").append(uid).append("\n");
+                            }
+
+                            if (sb.length() > 0) {
+                                sb.setLength(sb.length() - 1);
+                            }
+
+                            Log.d(TAG, sb.toString());
+
+                            }
+                        catch (VkException e) {
+                            //TODO: temporary
+                            sb.append("An error occurred while executing request.\n")
+                                .append("This probably means that application was not approved by vk.com ")
+                                .append("and only author can execute requests\n\n")
+                                .append("Anyway be informed that vk4j library still in development stage, ")
+                                .append("any questions are welcome at vladimir.grachev@gmail.com");
                         }
-
-                        if (sb.length() > 0) {
-                            sb.setLength(sb.length() - 1);
-                        }
-
-                        Log.d(TAG, sb.toString());
-
                         textView.setText(sb.toString());
                         textView.setVisibility(View.VISIBLE);
-                        
                     }
                     else if (url.contains("login_failure")) {
                         Log.d(TAG, "Login Failed");
