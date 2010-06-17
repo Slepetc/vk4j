@@ -37,7 +37,7 @@ public class Application implements RequestExecutor {
     private final static String LOGIN_URL = "http://vk.com/login.php?app=%d&layout=%s&type=%s&settings=%d";
 
     public Application(long id) {
-        this(id, "touch", "browser", 10);
+        this(id, "touch", "browser", 126);
     }
 
     public Application(long id, String layout, String type, int settings){
@@ -100,13 +100,13 @@ public class Application implements RequestExecutor {
 
 
     private void prepare(Request request) {
-        request.add("api_id", Long.toString(id));
-        request.add("v", "3.0");
-        request.add("format", "JSON");
-        request.add("test_mode", "1");
+        request.add(Request.TAG_API_ID, Long.toString(id));
+        request.add(Request.TAG_V, "3.0");
+        request.add(Request.TAG_FORMAT, "JSON");
+        request.add(Request.TAG_TEST_MODE, "1");
 
-        request.add("sig", digest.get(request));
-        request.add("sid", session.getSid());
+        request.add(Request.TAG_SIG, digest.get(request));
+        request.add(Request.TAG_SID, session.getSid());
     }
 
     public class RequestDigest {

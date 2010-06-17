@@ -21,6 +21,6 @@ public class GetAudio extends RequestBase {
     }
 
     public GetAudio() {
-        add(TAG_METHOD, METHOD);
+        super(METHOD);
     }
 }

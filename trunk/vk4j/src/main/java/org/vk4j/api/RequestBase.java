@@ -12,6 +12,10 @@ import java.util.TreeMap;
 public abstract class RequestBase implements Request {
     private TreeMap<String, String> values = new TreeMap<String, String>();
 
+    public RequestBase(String method) {
+        values.put(TAG_METHOD, method);
+    }
+
     public Map<String, String> getValues() {
         return values;
     }
