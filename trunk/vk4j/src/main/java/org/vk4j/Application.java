@@ -1,15 +1,15 @@
 package org.vk4j;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.vk4j.api.*;
+import org.vk4j.login.LoginProcessor;
+import org.vk4j.login.LoginResultListener;
+import org.vk4j.login.Session;
 
+import java.io.IOException;
 import java.math.BigInteger;
-import java.net.URLDecoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * Date: 27.04.2010
  * Time: 12:48:29
  */
-public class Application implements RequestExecutor {
+public class Application implements RequestExecutor, LoginResultListener {
 
     private static final String TAG = "[vk4j:Application]";
 
@@ -28,7 +28,8 @@ public class Application implements RequestExecutor {
     private String type;
     private int settings;
     private final RequestDigest digest = new RequestDigest();
-    private ILoginProcessor loginProcessor;
+    private LoginProcessor loginProcessor;
+    private LoginResultListener loginListener;
 
     public static final Pattern PATTERN_LOGIN = Pattern.compile(
             "login_success.*?session=(\\{.*?\\})"
@@ -48,42 +49,62 @@ public class Application implements RequestExecutor {
         this.client = new Client();
     }
 
-    public void setLoginProcessor(ILoginProcessor processor) {
+    public Application(long id, String layout, String type, int settings, Client client){
+        this.id = id;
+        this.layout = layout;
+        this.type = type;
+        this.settings = settings;
+        this.client = client;
+    }
+
+    public String getLoginUrl() {
+        return String.format(LOGIN_URL, id, layout, type, settings);
+    }
+
+    public boolean isLoggedIn() {
+        return session != null;
+    }
+    
+    @Deprecated
+    public void setLoginProcessor(LoginProcessor processor) {
         this.loginProcessor = processor;
     }
 
-    ILoginVerifier verifier = new ILoginVerifier() {
-        public boolean isLoginSuccess(String url) {
-            return Application.this.isLoginSuccess(url);
-        }
-    };
-
-    private boolean isLoginSuccess(String url) {
-        try {
-            Matcher m = PATTERN_LOGIN.matcher(URLDecoder.decode(url));
-
-            if (m.find()) {
-                JSONObject sessionInfo = new JSONObject(m.group(1));
-                this.session = new Session(sessionInfo.getLong(Key.EXPIRE),
-                                    sessionInfo.getLong(Key.MID),
-                                    sessionInfo.getString(Key.SECRET),
-                                    sessionInfo.getString(Key.SID));
-                return true;
-            }
-        } catch (JSONException e) {
-            //TODO: exception sender!
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-
-        return false;
+    @Deprecated
+    public void setLoginResultListener(LoginResultListener listener) {
+        this.loginListener = listener;
     }
 
-    public boolean login() {
-        if (loginProcessor != null) {
-            return loginProcessor.login(String.format(LOGIN_URL, id, layout, type, settings), verifier);
+    @Deprecated
+    public void onLoginResult(Session session) {
+        setSession(session);
+        if (loginListener != null) {
+            loginListener.onLoginResult(session);    
         }
-        return false;
     }
+
+    @Deprecated //LoginParser should be synchronize in application
+    public void login() throws IOException {
+        if (loginProcessor == null) {
+            throw new VkException("LoginParser processor has not been initialized!");
+        }
+        loginProcessor.doLogin(String.format(LOGIN_URL, id, layout, type, settings), this);
+    }
+
+    public boolean loginSync(LoginProcessor processor) throws IOException {
+        if (processor == null) {
+            throw new VkException("LoginParser processor has not been initialized!");
+        }
+
+        setSession(processor.doLogin(String.format(LOGIN_URL, id, layout, type, settings), this));
+
+        if (loginListener != null) {
+            loginListener.onLoginResult(session);
+        }
+
+        return session != null;
+    }
+
 
     public void setSession(Session session) {
         this.session = session;
@@ -99,11 +120,14 @@ public class Application implements RequestExecutor {
     }
 
 
+
+
+
     private void prepare(Request request) {
         request.add(Request.TAG_API_ID, Long.toString(id));
         request.add(Request.TAG_V, "3.0");
         request.add(Request.TAG_FORMAT, "JSON");
-        request.add(Request.TAG_TEST_MODE, "1");
+//        request.add(Request.TAG_TEST_MODE, "1");
 
         request.add(Request.TAG_SIG, digest.get(request));
         request.add(Request.TAG_SID, session.getSid());
@@ -138,13 +162,4 @@ public class Application implements RequestExecutor {
             return String.format("%1$032x", i);
         }
     }
-
-    public interface ILoginProcessor {
-        public boolean login(String loginUrl, ILoginVerifier verifier);
-    }
-
-    public interface ILoginVerifier {
-        public boolean isLoginSuccess(String url);
-    }
-
 }

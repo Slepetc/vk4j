@@ -31,7 +31,7 @@ public interface Parser<T extends Object> {
                     return parser.parse(response.get("response"));
                 }
                 if (response.has("error")) {
-                    throw new VkException("Error");
+                    throw new VkException("Error:" + string);
                 }
                 throw new VkException("Error unknown");
             } catch (JSONException e) {

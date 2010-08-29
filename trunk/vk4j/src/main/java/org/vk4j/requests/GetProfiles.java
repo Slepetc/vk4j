@@ -5,6 +5,7 @@ import org.vk4j.parsers.ListParser;
 import org.vk4j.api.RequestBase;
 import org.vk4j.parsers.ProfileParser;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -26,5 +27,35 @@ public class GetProfiles extends RequestBase {
 
     public GetProfiles() {
         super(METHOD);
+    }
+
+    public static class Builder {
+        private GetProfiles request = new GetProfiles(); 
+
+        public GetProfiles build() {
+            return request;
+        }
+
+        public Builder setUids(String uids) {
+            request.add(TAG_UIDS, uids);
+            return this;
+        }
+
+        public Builder setUids(Collection uids) {
+            StringBuffer sb = new StringBuffer();
+            for (Object uid : uids) {
+                sb.append(uid).append(",");
+            }
+            if (sb.length() > 0) {
+                sb.setLength(sb.length() - 1);
+            }
+            setUids(sb.toString());
+            return this;
+        }
+
+        public Builder setFields(String fields) {
+            request.add(TAG_FIELDS, fields);
+            return this;
+        }
     }
 }
