@@ -65,7 +65,7 @@ class Client {
             HttpResponse response = mHttpClient.execute(post);
 
             InputStream ios = response.getEntity().getContent();
-            BufferedReader br = new BufferedReader(new InputStreamReader(ios, Charset.forName("windows-1251")));
+            BufferedReader br = new BufferedReader(new InputStreamReader(ios));
             StringBuilder sb = new StringBuilder();
             String line = null;
 
