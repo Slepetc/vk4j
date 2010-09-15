@@ -24,13 +24,17 @@ public class WLoginRequest implements Request {
 
     public static final String URL_LOGIN 	= "http://login.vk.com/";
 
-    private String mUsername = "fgslies";
-    private String mPassword = "password";
+    private String mUsername;
+    private String mPassword;
 
     static {
         ParserFactory.register(METHOD, WLoginParser.class);
     }
 
+    public WLoginRequest(String username, String password) {
+        mUsername = username;
+        mPassword = password;
+    }
 
     public String getMethod() {
         return METHOD;
