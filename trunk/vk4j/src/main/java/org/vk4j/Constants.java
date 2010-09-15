@@ -6,7 +6,7 @@ package org.vk4j;
  * Time: 22:54:23
  */
 public class Constants {
-
+    
     public static final String EXPIRE = "expire";
     public static final String MID = "mid";
     public static final String SECRET = "secret";

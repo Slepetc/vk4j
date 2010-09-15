@@ -32,12 +32,13 @@ import java.nio.charset.Charset;
  * Date: 28.04.2010
  * Time: 22:05:44
  */
-class Client {
+public class Client {
 
     private final AbstractHttpClient mHttpClient;
 
-    private final static String API_URL = "http://api.vk.com/api.php";
-
+    /**
+     * Default constructor
+     */
     public Client() {
         HttpParams params = new BasicHttpParams();
         HttpConnectionParams.setConnectionTimeout(params, 20 * 1000);
@@ -54,18 +55,17 @@ class Client {
 
         try {
 
-            HttpPost post = new HttpPost(API_URL);
+//            HttpPost post = new HttpPost(request.getUrl());
+//
+//            StringEntity entity = new StringEntity(request.getContent());
+//            entity.setContentType("application/x-www-form-urlencoded");
+//
+//            post.setEntity(entity);
 
-            StringEntity entity = new StringEntity(request.toString());
-
-            entity.setContentType("application/x-www-form-urlencoded");
-
-            post.setEntity(entity);
-
-            HttpResponse response = mHttpClient.execute(post);
+            HttpResponse response = mHttpClient.execute(request.createHttpUriRequest());
 
             InputStream ios = response.getEntity().getContent();
-            BufferedReader br = new BufferedReader(new InputStreamReader(ios));
+            BufferedReader br = new BufferedReader(new InputStreamReader(ios, Charset.forName("windows-1251")));
             StringBuilder sb = new StringBuilder();
             String line = null;
 
@@ -91,7 +91,7 @@ class Client {
         return "";
     }
 
-    <T> T execute(Request request) {
+    public <T> T execute(Request request) {
         return ParserFactory.<T>newParser(request.getMethod()).parse(process(request));
     }
 }
