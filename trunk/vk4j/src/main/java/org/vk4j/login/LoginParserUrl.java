@@ -21,7 +21,8 @@ public class LoginParserUrl implements LoginParser {
         if (m.find()) {
             return new LoginParserJson().parse(m.group(1));
         }
-        return null;
+        //TODO: Temporary
+        return new LoginParserJson().parse(url);
     }
 
 }
