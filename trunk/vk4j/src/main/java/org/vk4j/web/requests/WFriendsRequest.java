@@ -21,6 +21,8 @@ public class WFriendsRequest implements Request {
 
     public static final String URL_FRIENDS_AJAX 	= "http://vk.com/friends_ajax.php";
 
+    private String mUid;
+
     static {
         ParserFactory.register(METHOD, WFriendsParser.class);
     }
@@ -34,9 +36,13 @@ public class WFriendsRequest implements Request {
         return URL_FRIENDS_AJAX;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    public WFriendsRequest(String uid) {
+        mUid = uid;
+    }
+
     public String getContent() {
         StringBuilder sb = new StringBuilder();
-        sb.append("id=").append(51298863)
+        sb.append("id=").append(mUid)
             .append("&filter=").append("phonebook");
         return sb.toString();
     }
