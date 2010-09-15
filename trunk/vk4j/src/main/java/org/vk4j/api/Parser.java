@@ -44,7 +44,11 @@ public interface Parser<T extends Object> {
             List<T1> result = new ArrayList<T1>();
 
             for (int i = 0; i < array.length(); i++) {
-                result.add(parser.getFromArray(array, i));
+                T1 item = parser.getFromArray(array, i);
+                if (item == null) {
+                    continue;
+                }
+                result.add(item);
             }
 
             return result;
