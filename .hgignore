@@ -1,0 +1,21 @@
+syntax: regexp
+
+# build results
+/target/.*$
+
+# idea project files
+\.idea/.*$
+\.iml*$
+
+# cookie files
+\.cookies*$
+
+#.idea
+#*.iml
+#trunk/vk4j/target
+#*.cookies
+#trunk/vk4j/src/test/config
+#trunk/vk4j/src/test/java
+trunk/examples/android/res/values/app_id.xml
+vk4j.java.hsp
+trunk/vk4j/src/main/.DS_Store
