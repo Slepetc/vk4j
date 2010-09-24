@@ -14,12 +14,17 @@ public class IntParser extends ParserBase<Integer> {
 
     @Override
     public Integer parse(Object object) {
+    	
+    	if (object instanceof Integer)
+    		return (Integer) object;
+    	if (object instanceof String)
+    		try {
+    			return Integer.parseInt((String) object);
+    		} catch (NumberFormatException e) {
+    			throw new VkException("This is not Integer");
+    		}
 
-        if (!(object instanceof Integer)) {
-            throw new VkException("This is not Integer");
-        }
-
-        return (Integer) object;
+        throw new VkException("This is not Integer");
     }
 
     @Override
