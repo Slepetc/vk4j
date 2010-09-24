@@ -56,7 +56,7 @@ class Client {
 
             HttpPost post = new HttpPost(API_URL);
 
-            StringEntity entity = new StringEntity(request.toString());
+            StringEntity entity = new StringEntity(request.toString(), "UTF-8");
 
             entity.setContentType("application/x-www-form-urlencoded");
 
