@@ -2,31 +2,30 @@ package org.vk4j.open.responses;
 
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Message {
+public class Wall {
 
-    public static final int BODY = 0;
-    public static final int TITLE = 1;
+    public static final int FROM_ID = 0;
+    public static final int TO_ID = 1;
     public static final int DATE = 2;
-    public static final int UID = 3;    
-    public static final int MID = 4;
-    public static final int READ_STATE = 5;
-    public static final int ATTACHMENTS = 6;
+    public static final int TEXT = 3;    
+    public static final int ID = 4;
+    public static final int ONLINE = 5;
+    public static final int MEDIA = 6;
 
-    public static final String[] FIELDS = { "body",
-    										"title",
+    public static final String[] FIELDS = { "from_id",
+                                            "to_id",
                                             "date",
-    										"uid",
-                                            "mid",
-                                            "read_state",
-                                            "attachments"
+                                            "text",
+                                            "id",
+                                            "online",
+                                            "media"
     };
 
     private final Map<String, Object> values = new HashMap<String, Object>();
 
-    public Message() {
+    public Wall() {
 
     }
 
@@ -58,49 +57,59 @@ public class Message {
     }
 
     public long getId() {
-        if (!values.containsKey(FIELDS[MID])) {
+        if (!values.containsKey(FIELDS[ID])) {
             return 0L;
         }
         try {
-            return Long.parseLong((String)values.get(FIELDS[MID]));
+            return Long.parseLong((String)values.get(FIELDS[ID]));
         }
         catch (NumberFormatException e) {
             return 0L;
         }
     }
 
-    public long getUid() {
-        if (!values.containsKey(FIELDS[UID])) {
+    public long getFromId() {
+        if (!values.containsKey(FIELDS[FROM_ID])) {
             return 0L;
         }
         try {
-            return Long.parseLong((String)values.get(FIELDS[UID]));
+            return Long.parseLong((String)values.get(FIELDS[FROM_ID]));
         }
         catch (NumberFormatException e) {
             return 0L;
         }
     }
     
-    public Integer getReadState() {
-    	if (!values.containsKey(FIELDS[READ_STATE])) {
-    		return null;
-    	}
-    	try {
-    		return Integer.parseInt((String)values.get(FIELDS[READ_STATE]));
-    	}
-    	catch (NumberFormatException e) {
-    		return null;    		
-    	}
+    public long getToId() {
+        if (!values.containsKey(FIELDS[TO_ID])) {
+            return 0L;
+        }
+        try {
+            return Long.parseLong((String)values.get(FIELDS[TO_ID]));
+        }
+        catch (NumberFormatException e) {
+            return 0L;
+        }
     }
     
-    public List<String> getAttachments() {
-		return (List<String>)values.get(FIELDS[ATTACHMENTS]);
+    public Boolean getOnline() {
+    	if (!values.containsKey(FIELDS[ONLINE])) {
+    		return null;
+    	}
+		return (values.get(FIELDS[ONLINE]) == "1");
+    }
+    
+    public Media getMedia() {
+    	if (!values.containsKey(FIELDS[MEDIA])) {
+    		return null;
+    	}
+		return (Media)values.get(FIELDS[MEDIA]);    	
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Message: ")
+        sb.append("Wall: ")
                 .append(" {");
 
         for (Map.Entry<String, Object> entry : values.entrySet()) {

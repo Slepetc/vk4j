@@ -1,8 +1,8 @@
 package org.vk4j.open.requests;
 
 import org.vk4j.api.ParserFactory;
-import org.vk4j.open.parsers.ListParser;
 import org.vk4j.open.parsers.StringParser;
+import org.vk4j.open.parsers.ListParser;
 
 /**
  * Created by Vladimir Grachev.

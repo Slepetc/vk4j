@@ -1,8 +1,8 @@
 package org.vk4j.open.requests;
 
 import org.vk4j.api.ParserFactory;
-import org.vk4j.open.parsers.ListParser;
 import org.vk4j.open.parsers.ProfileParser;
+import org.vk4j.open.parsers.ListParser;
 
 import java.util.Collection;
 

@@ -25,15 +25,18 @@ public class Profile {
     public static final int PHOTO_MEDIUM = 10;
     public static final int PHOTO_BIG = 11;
     public static final int PHOTO_REC = 12;
-    public static final int HAS_MOBILE = 13;
-    public static final int RATE = 14;
-    public static final int HOME_PHONE = 15;
-    public static final int MOBILE_PHONE = 16;
-    public static final int UNIVERSITY = 17;
-    public static final int UNIVERSITY_NAME = 18;
-    public static final int FACULTY = 19;
-    public static final int FACULTY_NAME = 20;
-    public static final int GRADUATION = 21;
+    public static final int ONLINE = 13;
+    public static final int LISTS = 14;
+    public static final int DOMAIN = 15;    
+    public static final int HAS_MOBILE = 16;
+    public static final int RATE = 17;
+    public static final int HOME_PHONE = 18;
+    public static final int MOBILE_PHONE = 19;
+    public static final int UNIVERSITY = 20;
+    public static final int UNIVERSITY_NAME = 21;
+    public static final int FACULTY = 22;
+    public static final int FACULTY_NAME = 23;
+    public static final int GRADUATION = 24;
 
     public static final String[] FIELDS = { "uid",
                                             "first_name",
@@ -48,6 +51,9 @@ public class Profile {
                                             "photo_medium",
                                             "photo_big",
                                             "photo_rec",
+                                            "online",
+                                            "lists",
+                                            "domain",
                                             "has_mobile",
                                             "rate",
                                             "home_phone",
