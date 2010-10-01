@@ -18,7 +18,7 @@ import java.util.Map;
  * Date: Sep 12, 2010
  * Time: 8:20:31 PM
  */
-public class WLoginRequest implements Request {
+public class WLoginRequest extends WRequestBase {
 
     public static final String METHOD = "web.login";
 

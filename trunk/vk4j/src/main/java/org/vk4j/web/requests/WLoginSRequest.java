@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
  * Date: Sep 13, 2010
  * Time: 7:18:35 PM
  */
-public class WLoginSRequest implements Request {
+public class WLoginSRequest extends WRequestBase {
 
     public static final String METHOD = "web.slogin";
 
