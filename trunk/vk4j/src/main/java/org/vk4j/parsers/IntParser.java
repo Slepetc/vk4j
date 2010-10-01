@@ -1,4 +1,4 @@
-package org.vk4j.open.parsers;
+package org.vk4j.parsers;
 
 import org.json.JSONArray;
 import org.json.JSONException;

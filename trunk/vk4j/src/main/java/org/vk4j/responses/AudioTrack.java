@@ -1,4 +1,4 @@
-package org.vk4j.open.responses;
+package org.vk4j.responses;
 
 /**
  * Created by Vladimir Grachev.

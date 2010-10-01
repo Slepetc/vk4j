@@ -4,14 +4,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.vk4j.api.ParserFactory;
-import org.vk4j.api.Request;
-import org.vk4j.open.parsers.AudioTrackParser;
-import org.vk4j.open.parsers.ListParser;
 import org.vk4j.web.parsers.WLoginParser;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Vladimir Grachev.

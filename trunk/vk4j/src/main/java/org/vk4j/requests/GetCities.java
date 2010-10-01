@@ -1,8 +1,8 @@
-package org.vk4j.open.requests;
+package org.vk4j.requests;
 
 import org.vk4j.api.ParserFactory;
-import org.vk4j.open.parsers.CitiesParser;
-import org.vk4j.open.responses.Profile;
+import org.vk4j.parsers.CitiesParser;
+import org.vk4j.responses.Profile;
 
 import java.util.HashSet;
 import java.util.List;

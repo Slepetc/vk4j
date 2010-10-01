@@ -1,4 +1,4 @@
-package org.vk4j.open.requests;
+package org.vk4j.requests;
 
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;

@@ -1,9 +1,9 @@
-package org.vk4j.open.parsers;
+package org.vk4j.parsers;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.vk4j.api.VkException;
-import org.vk4j.open.responses.AudioTrack;
+import org.vk4j.responses.AudioTrack;
 
 /**
  * Created by Vladimir Grachev.
