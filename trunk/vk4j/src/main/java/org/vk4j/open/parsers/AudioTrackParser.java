@@ -29,7 +29,6 @@ public class AudioTrackParser extends ParserBase<AudioTrack> {
             String url = track.getString("url");
 
             return new AudioTrack(aid, ownerId, artist, title, duration, url);
-
         } catch (JSONException e) {
             //TODO:
             e.printStackTrace();

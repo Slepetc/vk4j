@@ -23,6 +23,7 @@ import org.apache.http.params.HttpProtocolParams;
 import org.vk4j.api.ParserFactory;
 import org.vk4j.api.Request;
 import org.vk4j.api.RequestExecutor;
+import org.vk4j.connection.RedirectHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,7 +43,6 @@ public class Client implements RequestExecutor {
     private RedirectHandler redirectHandler;
 
     public static final String UTF8 = "utf-8";
-//    private final IReloginHandler reloginHandler;
 
     /**
      * Default constructor
@@ -126,10 +126,6 @@ public class Client implements RequestExecutor {
         }
 
         br.close();
-
-//        if (reloginHandler != null && reloginHandler.isReloginNeeded(sb.toString())){
-//            return reloginHandler.onRelogin(sb.toString(), headers);
-//        }
 
         return sb.toString();
     }
