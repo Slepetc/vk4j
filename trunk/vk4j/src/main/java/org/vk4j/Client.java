@@ -1,15 +1,18 @@
 package org.vk4j;
 
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
@@ -19,6 +22,8 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.vk4j.api.ParserFactory;
 import org.vk4j.api.Request;
+import org.vk4j.api.RequestExecutor;
+import org.vk4j.connection.RedirectHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,12 +37,16 @@ import java.nio.charset.Charset;
  * Date: 28.04.2010
  * Time: 22:05:44
  */
-class Client {
+public class Client implements RequestExecutor {
 
     private final AbstractHttpClient mHttpClient;
+    private RedirectHandler redirectHandler;
 
-    private final static String API_URL = "http://api.vk.com/api.php";
+    public static final String UTF8 = "utf-8";
 
+    /**
+     * Default constructor
+     */
     public Client() {
         HttpParams params = new BasicHttpParams();
         HttpConnectionParams.setConnectionTimeout(params, 20 * 1000);
@@ -48,36 +57,32 @@ class Client {
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 
         mHttpClient = new DefaultHttpClient(new ThreadSafeClientConnManager(params, schemeRegistry), params);
+        redirectHandler = new RedirectHandler();
+        mHttpClient.setRedirectHandler(redirectHandler);
+    }
+
+    public void setCookieStore(CookieStore store) {
+        mHttpClient.setCookieStore(store);
+    }
+
+    public CookieStore getCookieStore() {
+        return mHttpClient.getCookieStore();
+    }
+
+    public <T> T execute(Request request) {
+        T result = ParserFactory.<T>newParser(request.getMethod()).parse(process(request), this);
+        if (!request.isPrimaryRequest())
+            return result;
+        if (!redirectHandler.isRelogin())
+            return result;
+        redirectHandler.setRelogin(false);
+        return ParserFactory.<T>newParser(request.getMethod()).parse(process(request), this);
     }
 
     private String process(Request request) {
 
         try {
-
-            HttpPost post = new HttpPost(API_URL);
-
-            StringEntity entity = new StringEntity(request.toString(), "UTF-8");
-
-            entity.setContentType("application/x-www-form-urlencoded");
-
-            post.setEntity(entity);
-
-            HttpResponse response = mHttpClient.execute(post);
-
-            InputStream ios = response.getEntity().getContent();
-            BufferedReader br = new BufferedReader(new InputStreamReader(ios));
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-
-            while ((line = br.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-
-            br.close();
-            response.getEntity().consumeContent();
-
-            return sb.toString();
-
+            return getPage(request.createHttpUriRequest());
         } catch (ClientProtocolException e) {
             //TODO: Internal Error
             e.printStackTrace();
@@ -91,7 +96,52 @@ class Client {
         return "";
     }
 
-    <T> T execute(Request request) {
-        return ParserFactory.<T>newParser(request.getMethod()).parse(process(request));
+    private String getPage(HttpUriRequest request) throws IOException {
+        return getPage(request, UTF8);
     }
+
+    private String getPage(HttpUriRequest request, String charset) throws IOException {
+        HttpResponse response = mHttpClient.execute(request);
+
+        String page = getPage(response.getEntity().getContent(), request.getAllHeaders(), getCharset(response, charset));
+        response.getEntity().consumeContent();
+
+//        if (captchaHandler != null) {
+//            while (captchaHandler.isCaptchaNeeded(page)){
+//                ApiLog.log.e(TAG, "Captcha nedded");
+//            }
+//        }
+
+        return page;
+    }
+
+    private String getPage(InputStream ios, Header[] headers, String charset) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(ios, Charset.forName(charset)));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+
+        while ((line = br.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+
+        br.close();
+
+        return sb.toString();
+    }
+
+    public String getCharset(HttpResponse response, String defaultCharset) {
+        Header contentType = response.getFirstHeader("Content-Type");
+        if (contentType == null){
+            return defaultCharset;
+        }
+        for (HeaderElement element : contentType.getElements()){
+            NameValuePair charset = element.getParameterByName("charset");
+            if (charset != null){
+                return charset.getValue();
+            }
+        }
+        return defaultCharset;
+    }
+
 }

@@ -2,7 +2,6 @@ package org.vk4j.parsers;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.vk4j.api.ParserBase;
 import org.vk4j.api.VkException;
 import org.vk4j.responses.AudioTrack;
 

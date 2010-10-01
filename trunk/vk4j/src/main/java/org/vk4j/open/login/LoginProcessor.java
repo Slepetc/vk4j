@@ -1,4 +1,4 @@
-package org.vk4j.login;
+package org.vk4j.open.login;
 
 import java.io.IOException;
 

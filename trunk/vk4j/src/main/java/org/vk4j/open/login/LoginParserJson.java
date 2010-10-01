@@ -1,4 +1,4 @@
-package org.vk4j.login;
+package org.vk4j.open.login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +21,7 @@ public class LoginParserJson implements LoginParser {
 
         } catch (JSONException e) {
             //TODO: Error!
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
         return null;

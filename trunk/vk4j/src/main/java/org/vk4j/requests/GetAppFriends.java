@@ -1,7 +1,6 @@
 package org.vk4j.requests;
 
 import org.vk4j.api.ParserFactory;
-import org.vk4j.api.RequestBase;
 import org.vk4j.parsers.ListParser;
 import org.vk4j.parsers.StringParser;
 
