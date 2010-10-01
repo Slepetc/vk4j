@@ -3,7 +3,6 @@ package org.vk4j.parsers;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.vk4j.api.ParserBase;
 import org.vk4j.api.VkException;
 
 import java.util.Collections;

@@ -1,15 +1,9 @@
 package org.vk4j.parsers;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.vk4j.api.ParserBase;
 import org.vk4j.api.VkException;
-import org.vk4j.requests.GetProfiles;
 import org.vk4j.responses.Profile;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Vladimir Grachev.

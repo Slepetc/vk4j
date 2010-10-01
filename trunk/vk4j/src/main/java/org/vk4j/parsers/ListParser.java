@@ -1,8 +1,5 @@
 package org.vk4j.parsers;
 
-import org.vk4j.api.ParserBase;
-import org.vk4j.parsers.LongParser;
-
 import java.util.List;
 
 /**

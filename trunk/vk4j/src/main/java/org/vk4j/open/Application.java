@@ -1,9 +1,11 @@
-package org.vk4j;
+package org.vk4j.open;
 
+import org.vk4j.Client;
 import org.vk4j.api.*;
-import org.vk4j.login.LoginProcessor;
-import org.vk4j.login.LoginResultListener;
-import org.vk4j.login.Session;
+import org.vk4j.open.login.LoginProcessor;
+import org.vk4j.open.login.LoginResultListener;
+import org.vk4j.open.login.Session;
+import org.vk4j.requests.RequestBase;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -17,7 +19,7 @@ import java.util.regex.Pattern;
  * Date: 27.04.2010
  * Time: 12:48:29
  */
-public class Application implements RequestExecutor, LoginResultListener {
+public class Application implements LoginResultListener {
 
     private static final String TAG = "[vk4j:Application]";
 
@@ -110,7 +112,7 @@ public class Application implements RequestExecutor, LoginResultListener {
         this.session = session;
     }
 
-    public <S extends Object> S execute(Request request) {
+    public <S extends Object> S execute(RequestBase request) {
         prepare(request);
 
         // Special thanks to Oleg Ignatenko ( http://ru.linkedin.com/in/olegignatenko ) for code review and useful comments :)
@@ -119,18 +121,14 @@ public class Application implements RequestExecutor, LoginResultListener {
         return client.<S>execute(request);
     }
 
-
-
-
-
-    private void prepare(Request request) {
-        request.add(Request.TAG_API_ID, Long.toString(id));
-        request.add(Request.TAG_V, "3.0");
-        request.add(Request.TAG_FORMAT, "JSON");
+    private void prepare(RequestBase request) {
+        request.add(RequestBase.TAG_API_ID, Long.toString(id));
+        request.add(RequestBase.TAG_V, "3.0");
+        request.add(RequestBase.TAG_FORMAT, "JSON");
 //        request.add(Request.TAG_TEST_MODE, "1");
 
-        request.add(Request.TAG_SIG, digest.get(request));
-        request.add(Request.TAG_SID, session.getSid());
+        request.add(RequestBase.TAG_SIG, digest.get(request));
+        request.add(RequestBase.TAG_SID, session.getSid());
     }
 
     public class RequestDigest {
@@ -145,7 +143,7 @@ public class Application implements RequestExecutor, LoginResultListener {
             }
         }
 
-        public String get(Request request) {
+        public String get(RequestBase request) {
             StringBuilder sb = new StringBuilder();
             sb.append(session.getMid());
             md5.reset();
