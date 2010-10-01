@@ -1,7 +1,5 @@
 package org.vk4j.api;
 
-import org.vk4j.api.RequestBase;
-
 /**
  * Created by Vladimir Grachev.
  * Date: 16.05.2010
