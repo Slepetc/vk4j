@@ -1,11 +1,11 @@
 package org.vk4j.open;
 
-import org.vk4j.Client;
+import org.vk4j.connection.Client;
 import org.vk4j.api.*;
 import org.vk4j.open.login.LoginProcessor;
 import org.vk4j.open.login.LoginResultListener;
 import org.vk4j.open.login.Session;
-import org.vk4j.requests.RequestBase;
+import org.vk4j.open.requests.RequestBase;
 
 import java.io.IOException;
 import java.math.BigInteger;
