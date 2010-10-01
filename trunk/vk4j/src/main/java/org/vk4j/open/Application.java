@@ -1,6 +1,6 @@
 package org.vk4j.open;
 
-import org.vk4j.Client;
+import org.vk4j.connection.Client;
 import org.vk4j.api.*;
 import org.vk4j.open.login.LoginProcessor;
 import org.vk4j.open.login.LoginResultListener;
@@ -120,10 +120,6 @@ public class Application implements LoginResultListener {
         // and http://java.sun.com/docs/books/jls/third_edition/html/expressions.html#15.12
         return client.<S>execute(request);
     }
-
-
-
-
 
     private void prepare(RequestBase request) {
         request.add(RequestBase.TAG_API_ID, Long.toString(id));
