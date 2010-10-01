@@ -14,10 +14,10 @@ import java.util.List;
  */
 public interface Parser<T extends Object> {
 
-    public T parse(String string);
-    public T parse(Object object);
-    public <T1 extends Object> List<T1> parseArray(Object object, String type);
-    public T getFromArray(JSONArray array, int idx);
+    public T parse(String string, RequestExecutor executor);
+//    public T parse(Object object);
+//    public <T1 extends Object> List<T1> parseArray(Object object, String type);
+//    public T getFromArray(JSONArray array, int idx);
     public void setInnerType(String innerType);
 
 } //Parser

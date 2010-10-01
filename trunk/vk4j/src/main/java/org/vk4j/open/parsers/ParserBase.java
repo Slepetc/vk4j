@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.vk4j.api.Parser;
 import org.vk4j.api.ParserFactory;
+import org.vk4j.api.RequestExecutor;
 import org.vk4j.api.VkException;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public abstract class ParserBase<T extends Object> implements Parser<T> {
         this.innerType = innerType;
     }
 
-    public T parse(String string) {
+    public T parse(String string, RequestExecutor executor) {
         return Helper.<T>parseJSON(string, this);
     }
 
@@ -44,8 +45,8 @@ public abstract class ParserBase<T extends Object> implements Parser<T> {
         if (!(object instanceof JSONArray)) {
             throw new VkException("ListParser can't parse not JSONArray object");
         }
-
-        return Helper.<T1>parseArray((JSONArray) object, ParserFactory.<T1>newParser(type));
+                                                         //TODO: this cast is bad
+        return Helper.<T1>parseArray((JSONArray) object, (ParserBase) ParserFactory.<T1>newParser(type));
     }
 
     public T getFromArray(JSONArray array, int idx) {
@@ -55,7 +56,7 @@ public abstract class ParserBase<T extends Object> implements Parser<T> {
     public static class Helper {
         private Helper() {} // IMPL NOTE instantiation prohibited
 
-        protected static<T extends Object> T parseJSON(String string, Parser<T> parser) {
+        protected static<T extends Object> T parseJSON(String string, ParserBase<T> parser) {
             try {
 
                 JSONObject response = new JSONObject(string);
@@ -71,7 +72,7 @@ public abstract class ParserBase<T extends Object> implements Parser<T> {
             }
         }
 
-        protected static <T1 extends Object> List<T1> parseArray(JSONArray array, Parser<T1> parser) {
+        protected static <T1 extends Object> List<T1> parseArray(JSONArray array, ParserBase<T1> parser) {
             List<T1> result = new ArrayList<T1>();
 
             for (int i = 0; i < array.length(); i++) {
@@ -86,7 +87,7 @@ public abstract class ParserBase<T extends Object> implements Parser<T> {
 
         }
 
-        protected static <T1 extends Object> T1 getFromArray(JSONArray array, int idx, Parser<T1> parser) {
+        protected static <T1 extends Object> T1 getFromArray(JSONArray array, int idx, ParserBase<T1> parser) {
             try {
                 return parser.parse(array.get(idx));
             } catch (JSONException e) {

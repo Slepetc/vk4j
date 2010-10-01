@@ -25,5 +25,7 @@ public interface Request {
 
     public String getContent();
 
-    public HttpUriRequest createHttpUriRequest();    
+    public HttpUriRequest createHttpUriRequest();
+
+    public boolean isPrimaryRequest();
 }

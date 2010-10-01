@@ -97,6 +97,10 @@ public abstract class RequestBase implements Request {
         return result;
     }
 
+    public boolean isPrimaryRequest() {
+        return true;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
