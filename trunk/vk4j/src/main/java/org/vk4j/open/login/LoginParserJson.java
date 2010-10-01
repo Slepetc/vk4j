@@ -21,7 +21,7 @@ public class LoginParserJson implements LoginParser {
 
         } catch (JSONException e) {
             //TODO: Error!
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
         return null;
