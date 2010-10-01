@@ -1,7 +1,7 @@
-package org.vk4j.open.requests;
+package org.vk4j.requests;
 
 import org.vk4j.api.ParserFactory;
-import org.vk4j.open.parsers.IntParser;
+import org.vk4j.parsers.IntParser;
 
 /**
  * Created by Vladimir Grachev.

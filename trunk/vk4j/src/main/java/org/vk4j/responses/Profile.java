@@ -1,4 +1,4 @@
-package org.vk4j.open.responses;
+package org.vk4j.responses;
 
 import java.util.Date;
 import java.util.Calendar;

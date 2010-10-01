@@ -1,8 +1,8 @@
-package org.vk4j.open.requests;
+package org.vk4j.requests;
 
 import org.vk4j.api.ParserFactory;
-import org.vk4j.open.parsers.ListParser;
-import org.vk4j.open.parsers.AudioTrackParser;
+import org.vk4j.parsers.ListParser;
+import org.vk4j.parsers.AudioTrackParser;
 
 /**
  * Created by Vladimir Grachev.

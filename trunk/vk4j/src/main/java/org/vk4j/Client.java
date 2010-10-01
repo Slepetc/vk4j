@@ -1,4 +1,4 @@
-package org.vk4j.connection;
+package org.vk4j;
 
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
@@ -23,6 +23,7 @@ import org.apache.http.params.HttpProtocolParams;
 import org.vk4j.api.ParserFactory;
 import org.vk4j.api.Request;
 import org.vk4j.api.RequestExecutor;
+import org.vk4j.connection.RedirectHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
