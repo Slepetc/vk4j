@@ -15,7 +15,7 @@ import java.io.UnsupportedEncodingException;
  * Date: Sep 13, 2010
  * Time: 7:29:57 PM
  */
-public class WFriendsRequest implements Request {
+public class WFriendsRequest extends WRequestBase {
 
     public static final String METHOD = "web.friends";
 
