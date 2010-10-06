@@ -4,9 +4,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.vk4j.api.ParserFactory;
-import org.vk4j.api.Request;
 import org.vk4j.web.parsers.WLoginApplicationParser;
-import org.vk4j.web.parsers.WLoginSParser;
 
 import java.io.UnsupportedEncodingException;
 
