@@ -67,6 +67,10 @@ public class Application implements LoginResultListener {
         return session != null;
     }
     
+    public Client getClient() {
+    	return client;
+    }
+    
     @Deprecated
     public void setLoginProcessor(LoginProcessor processor) {
         this.loginProcessor = processor;
