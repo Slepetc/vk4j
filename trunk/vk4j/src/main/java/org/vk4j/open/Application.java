@@ -90,7 +90,7 @@ public class Application implements LoginResultListener {
         if (loginProcessor == null) {
             throw new VkException("LoginParser processor has not been initialized!");
         }
-        loginProcessor.doLogin(String.format(LOGIN_URL, id, layout, type, settings), this);
+        loginProcessor.doLogin(getLoginUrl(), this);
     }
 
     public boolean loginSync(LoginProcessor processor) throws IOException {
@@ -98,7 +98,7 @@ public class Application implements LoginResultListener {
             throw new VkException("LoginParser processor has not been initialized!");
         }
 
-        setSession(processor.doLogin(String.format(LOGIN_URL, id, layout, type, settings), this));
+        setSession(processor.doLogin(getLoginUrl(), this));
 
         if (loginListener != null) {
             loginListener.onLoginResult(session);
