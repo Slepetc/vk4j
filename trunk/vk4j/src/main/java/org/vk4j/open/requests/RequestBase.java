@@ -18,6 +18,7 @@ import java.util.TreeMap;
 public abstract class RequestBase implements Request {
 
     private final static String API_URL = "http://api.vk.com/api.php";
+    public static final String UTF8 = "utf-8";
 
     public static final String TAG_METHOD = "method";
     public static final String TAG_API_ID = "api_id";
@@ -87,7 +88,7 @@ public abstract class RequestBase implements Request {
     public HttpUriRequest createHttpUriRequest() {
         HttpPost result = new HttpPost(getUrl());
         try {
-            StringEntity entity = new StringEntity(getContent());
+            StringEntity entity = new StringEntity(getContent(), UTF8);
             entity.setContentType("application/x-www-form-urlencoded");
             result.setEntity(entity);
         } catch (UnsupportedEncodingException e) {
